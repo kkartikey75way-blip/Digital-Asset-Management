@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+    --color-brand-primary: hsl(230, 80%, 60%);
+    --color-brand-secondary: hsl(190, 90%, 50%);
+    --color-brand-accent: hsl(280, 80%, 60%);
+
+    --color-glass-bg: rgba(255, 255, 255, 0.75);
+    --color-glass-border: rgba(255, 255, 255, 0.4);
+    --color-glass-dark-bg: rgba(15, 23, 42, 0.85);
+
+    --shadow-premium: 0 20px 50px -12px rgba(0, 0, 0, 0.15), 0 10px 20px -10px rgba(0, 0, 0, 0.05);
+    --shadow-glow: 0 0 30px rgba(79, 70, 229, 0.5);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+@layer base {
+    body {
+        @apply bg-slate-50 text-slate-900 antialiased;
+        background-image:
+            radial-gradient(at 0% 0%, hsla(230, 80%, 96%, 1) 0, transparent 50%),
+            radial-gradient(at 50% 0%, hsla(190, 90%, 96%, 1) 0, transparent 50%),
+            radial-gradient(at 100% 0%, hsla(280, 80%, 96%, 1) 0, transparent 50%);
+        min-height: 100vh;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@layer components {
+    .glass-card {
+        @apply bg-white/75 backdrop-blur-2xl border border-white/40 shadow-premium transition-all duration-500 rounded-[2.5rem];
+    }
+
+    .glass-card:hover {
+        @apply bg-white/90 border-white/60 -translate-y-2 shadow-2xl;
+    }
+
+    .premium-gradient {
+        @apply bg-gradient-to-br from-indigo-600 via-violet-600 to-fuchsia-500 text-white shadow-glow;
+    }
+
+    .premium-button {
+        @apply relative overflow-hidden transition-all duration-300 active:scale-95 px-8 py-3 rounded-2xl font-bold;
+    }
+
+    .premium-button::after {
+        content: '';
+        @apply absolute inset-0 bg-white/25 opacity-0 transition-opacity duration-300;
+    }
+
+    .premium-button:hover::after {
+        @apply opacity-100;
+    }
+
+    .stat-label {
+        @apply text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-1;
+    }
+
+    .stat-value {
+        @apply text-3xl font-black text-slate-900 tracking-tight;
+    }
+}
